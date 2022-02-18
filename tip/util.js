@@ -51,3 +51,29 @@ const transpose = matrix => matrix.reduce(
     });                                    
     return results; 
   }
+ 
+ function getCombination(arr, len = arr.length) {
+  if (len === 1) return arr.map(el => [el]);
+
+  const combis = [];
+
+  arr.forEach((curr, idx) => {
+    const smallerCombis = getCombination(arr.slice(idx + 1), len - 1);
+
+    smallerCombis.forEach((smallerCombi) => {
+      combis.push([curr, ...smallerCombi]);
+    });
+
+  });
+
+  return combis;
+}
+
+function isPrimeNum(num) {
+  if(num < 2) return false;
+  if(num === 2) return true;
+  for(let i = 2; i< Math.sqrt(num)+1; i++) {
+    if(num % i === 0) return false;
+  }
+  return true;
+}
